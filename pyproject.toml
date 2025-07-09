@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terraform-plan-reviewer"
+version = "0.1.0"
+description = "A CLI tool to summarize Terraform plans using GPT or Claude"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+dependencies = [
+    "click",
+    "openai",
+    "httpx",
+    "python-dotenv",
+    "rich"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+
+[project.scripts]
+tf-reviewer = "terraform_plan_reviewer.cli:analyze"

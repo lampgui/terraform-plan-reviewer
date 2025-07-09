@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.venv/
+venv/
+*.env
+
+# Virtualenv
+ENV/
+env/
+*.pyo
+
+# macOS
+.DS_Store
+
+# IDEs/editors
+.vscode/
+.idea/
+
+# Logs and local outputs
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.out
+
+# Compiled binary
+*.so
+*.dll
+*.dylib
+
+# Testing cache
+.tox/
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage*
+.cache
+
+# Zip archive
+*.zip
+
+# Misc
+*.db
