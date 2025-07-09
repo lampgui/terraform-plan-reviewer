@@ -1,1 +1,73 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "1.5.7",
+  "planned_values": {},
+  "resource_changes": [
+    {
+      "address": "azurerm_resource_group.main",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "main",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "rg-demo",
+          "location": "eastus"
+        }
+      }
+    },
+    {
+      "address": "azurerm_public_ip.web_ip",
+      "mode": "managed",
+      "type": "azurerm_public_ip",
+      "name": "web_ip",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "web-ip",
+          "sku": "Basic",
+          "allocation_method": "Static",
+          "ip_version": "IPv4"
+        }
+      }
+    },
+    {
+      "address": "azurerm_virtual_machine.vm1",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine",
+      "name": "vm1",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "name": "vm1",
+          "size": "Standard_B2s"
+        },
+        "after": {
+          "name": "vm1",
+          "size": "Standard_B4ms"
+        }
+      }
+    },
+    {
+      "address": "azurerm_storage_account.data",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "data",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {
+          "name": "datastorage1",
+          "sku": "Standard_LRS"
+        },
+        "after": {
+          "name": "datastorage1",
+          "sku": "Standard_ZRS"
+        },
+        "replace": ["sku"]
+      }
+    }
+  ]
+}
 
