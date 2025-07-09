@@ -1,95 +1,111 @@
-# 🚀 Terraform Plan Reviewer CLI
+# Terraform Plan Reviewer
 
-A GPT-powered CLI tool that summarizes and reviews Terraform plans in plain English.
+A CLI tool that parses a Terraform plan JSON and uses an LLM (GPT or Claude) to provide a human-readable summary, highlight risks, and suggest review steps.
 
 ---
 
-## 🧠 What It Does
+## 🚀 Features
 
-- Parses `terraform show -json` plan files
-- Uses GPT to generate:
-  - Change summaries
-  - Risk callouts (deletes, downtimes, replacements)
-  - Reviewer checklists
-- Outputs in text, Markdown, or JSON
-- Works entirely from the command line
+- 🧠 Summarizes Terraform infrastructure changes using LLMs
+- 📛 Identifies potential risks (e.g. downtime, deletion, public exposure)
+- ✅ Lists items to double-check before approval
+- 🛠 Supports **OpenAI GPT** and **Anthropic Claude** (via Together API)
+- 🖥️ Output formats: text, markdown, or JSON
+- 📂 Optional output to file
 
 ---
 
 ## 🛠 Installation
 
-**Option 1: Clone & install locally**
 ```bash
-git clone https://github.com/your-username/terraform-plan-reviewer.git
+git clone https://github.com/lampgui/terraform-plan-reviewer.git
 cd terraform-plan-reviewer
-python3 -m venv venv && source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install -e .
 ```
 
-**Option 2: Install dependencies manually**
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
-## ⚙️ Usage
+## 🔑 API Keys
 
-Generate your Terraform plan in JSON:
-```bash
-terraform plan -out=tfplan.binary
-terraform show -json tfplan.binary > tfplan.json
-```
+Create a `.env` file in the root:
 
-Run the reviewer:
-```bash
-tf-reviewer tfplan.json
-```
-
-With options:
-```bash
-tf-reviewer tfplan.json --model gpt-3.5-turbo --format markdown --output summary.md
-```
-
----
-
-## 🔐 Setup `.env`
-
-Create a `.env` file in the project root:
 ```env
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+OPENAI_API_KEY=sk-...
+TOGETHER_API_KEY=...
 ```
 
 ---
 
-## 📸 Example Output
+## 🧪 Example Usage
 
+```bash
+tf-reviewer examples/sample_plan.json --model gpt-3.5-turbo --format markdown
 ```
-1. ✅ A new resource group named `main` will be created.
-2. 🛑 A storage account named `data` will be deleted and recreated.
-3. 🔄 A virtual machine will be resized from Standard_B2s to Standard_B4ms.
 
-⚠️ Review risks: data loss, public IP exposure, possible downtime.
+Use Claude:
+
+```bash
+tf-reviewer examples/sample_plan.json --provider claude --format text
+```
+
+Save output:
+
+```bash
+tf-reviewer examples/sample_plan.json --output summary.md
 ```
 
 ---
 
-## 💡 Roadmap
+## 🧾 Output Example
 
-- [ ] GitHub PR bot integration
-- [ ] Infracost cost estimation support
-- [ ] VS Code extension
-- [ ] Optional Web UI frontend
+```
+🔍 Parsing Terraform plan...
+🤖 Sending to OPENAI for analysis...
+
+1. **Changes Summary**:
+   - Create RG: `main`
+   - Update VM: `vm1`
+   - Recreate storage: `data`
+
+2. **Risks**:
+   - Downtime on VM
+   - Potential data loss on storage replace
+   - Public IP exposure
+
+3. **Double Check**:
+   - Backups for `data`
+   - Maintenance window for `vm1`
+   - NSG rules on public IP
+```
 
 ---
 
-## 🙌 Contributing
+## 📂 Project Structure
 
-Pull requests and feedback are welcome!  
-Please open an issue or fork the project and submit a PR.
+```
+terraform_plan_reviewer/
+├── cli.py
+├── gpt.py
+├── parser.py
+├── printer.py
+examples/
+├── sample_plan.json
+pyproject.toml
+README.md
+```
+
+---
+
+## 🔍 Troubleshooting
+
+- `ModuleNotFoundError`: Ensure all `.py` files are in the `terraform_plan_reviewer/` folder.
+- `No output`: Check `.env` is set and API keys are valid.
+- `tf-reviewer not found`: Did you run `pip install -e .`?
 
 ---
 
 ## 📝 License
 
-[MIT](LICENSE)
+MIT
