@@ -1,0 +1,23 @@
+Commercial License
+
+Copyright (c) 2025 Joshua Lampenfield
+
+This software is licensed under a dual license model.
+
+You may use this software under the terms of the MIT license, as specified in the LICENSE file.
+
+Alternatively, commercial users seeking to use this software in proprietary projects,
+internal tools, or commercial SaaS platforms must obtain a commercial license.
+
+This commercial license grants:
+- Use in proprietary or closed-source applications
+- Access to premium features and support (if applicable)
+- Permission for internal company usage beyond open-source terms
+
+To obtain a commercial license, contact: joshua@example.com
+
+You may not:
+- Resell or sublicense the software without permission
+- Remove copyright or licensing notices
+
+For more information, visit: https://github.com/lampgui/terraform-plan-reviewer
