@@ -1,6 +1,6 @@
 Commercial License
 
-Copyright (c) 2025 Joshua Lampenfield
+Copyright (c) 2025 lampgui
 
 This software is licensed under a dual license model.
 
