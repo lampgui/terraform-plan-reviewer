@@ -63,21 +63,25 @@ tf-reviewer examples/sample_plan.json --output summary.md
 ```
 🔍 Parsing Terraform plan...
 🤖 Sending to OPENAI for analysis...
+✅ GPT response received.
 
-1. **Changes Summary**:
-   - Create RG: `main`
-   - Update VM: `vm1`
-   - Recreate storage: `data`
+1. **Infrastructure Changes Summary:**
+   - A new Azure resource group named `main` will be created.
+   - A new public IP named `web_ip` will be created.
+   - An existing virtual machine named `vm1` will be updated.
+   - An existing storage account named `data` will be deleted and recreated, which requires replacement.
 
-2. **Risks**:
-   - Downtime on VM
-   - Potential data loss on storage replace
-   - Public IP exposure
+2. **Potential Risks:**
+   - The recreation of the `azurerm_storage_account.data` may lead to data loss if not handled properly.
+   - Any changes to the `azurerm_virtual_machine.vm1` may cause downtime if not managed carefully.
+   - The creation of a new public IP `web_ip` may expose services to the public internet, potentially introducing security risks.
 
-3. **Double Check**:
-   - Backups for `data`
-   - Maintenance window for `vm1`
-   - NSG rules on public IP
+3. **Double-Check Before Approval:**
+   - Verify if any critical data is stored in the `azurerm_storage_account.data` that needs to be backed up before deletion.
+   - Ensure that any updates to `azurerm_virtual_machine.vm1` are thoroughly tested in a non-production environment to mitigate downtime risks.
+   - Review the security settings of the new public IP `web_ip` to ensure that only necessary services are exposed to the internet and proper security measures are in place.
+   - Confirm that all dependencies and configurations related to the changes are accurately reflected in the Terraform plan.
+
 ```
 
 ---
